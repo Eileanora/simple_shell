@@ -49,9 +49,11 @@ int _getline(char **lineptr, size_t *n, FILE* stream)
 	*n = line_size;
 	return (line_size);
 }
+/**
 // 1 - getline function have three parameters
 //     - char **lineptr: pointer to a string to read into
 //     - size_t *n: pointer to a variable holding the size of the string 
 // 	- on faliure -> returns -1 otherwise returns the number of bytes read
 //     - FILE *stream: pointer to a file stream to read from
 //     - getline returns int -> number of bytes read or -1 on failure
+*/
