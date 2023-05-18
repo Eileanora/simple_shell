@@ -1,5 +1,58 @@
 #include "main.h"
 /**
+ * copy_str - copies a string
+ * @source: source string
+ * @dist: destination string
+ * @start: starting index (for lineptr)
+ * @end: ending index (for buffer)
+ * Return: pointer to the new string
+*/
+char *copy_str(char *source, char *dist, int start, int end)
+{
+	int i = 0;
+
+	for (i = 0; i <= end; i++)
+		dist[start++] = source[i];
+
+	dist[start] = '\0';
+	return (dist);
+}
+/**
+ * _realloc - reallocates a memory block using malloc and free
+ * @ptr: pointer to the memory previously allocated with a call to malloc
+ * @old_size: size, in bytes, of the allocated space for ptr
+ * @new_size: new size, in bytes of the new memory block
+ *
+ * Return: pointer to the newly allocated memory
+*/
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+{
+	char *ans;
+	unsigned int i, sz;
+
+	if (new_size == old_size)
+		return (ptr);
+	if (new_size == 0 && ptr != NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	ans  = malloc(new_size);
+	if (ans == NULL)
+		return (NULL);
+	if (ptr == NULL)
+		return (ans);
+
+
+	sz = old_size < new_size ? old_size : new_size;
+	for (i = 0; i < sz; i++)
+		ans[i] = ((char *)ptr)[i];
+
+	if (ptr != NULL)
+		free(ptr);
+	return (ans);
+}
+/**
  * _getline - reads an entire line from a file stream
  * @lineptr: pointer to a string to read into
  * @n: pointer to a variable holding the size of the string
