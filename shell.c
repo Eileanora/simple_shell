@@ -26,11 +26,10 @@ int main (int argc, char **argv)
 		}
 		/* write(1, linptr, _strlen(linptr)); */
 		args = split_string(linptr, DELIM);
-		
+		execmd(args);
 		for (i = 0; args[i]; i++)
 		{
-			write(1, args[i], _strlen(args[i]));
-			write(1, "\n", 1);
+		
 			free(args[i]);
 		}
 		free(args);
