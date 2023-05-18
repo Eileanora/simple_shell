@@ -23,5 +23,6 @@ char *read_line();
 char *copy_str(char *source, char *dist, int start, int end);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _getline(char **lineptr, size_t *n, FILE* stream);
+void execmd(char **argv);
 
 #endif

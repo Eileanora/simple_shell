@@ -17,9 +17,12 @@ int main (int argc, char **argv)
 			write(1, "exiting...\n", 11);
 			break;
 		}
-		args = split_string(lineptr, DELIM);
+		/* write(1, linptr, _strlen(linptr)); */
+		args = split_string(linptr, DELIM);
+		execmd(args);
 		for (i = 0; args[i]; i++)
 		{
+		
 			free(args[i]);
 		}
 		free(args);
