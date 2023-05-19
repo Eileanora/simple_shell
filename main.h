@@ -19,6 +19,7 @@ char *_strchr(char *s, char c);
 
 char **split_string(char *str, char *delim);
 char *read_line();
+int create_process(char **argv);
 
 char *copy_str(char *source, char *dist, int start, int end);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);

@@ -6,14 +6,14 @@
 */
 char *read_line()
 {
-	char *line = NULL;
+	char *line;
 	size_t len = 0;
 
 	if (getline(&line, &len, stdin) == -1)
 	{
 		write(1, "exiting...\n", 11);
 		free(line);
-		if (feof(stdin))
+		if (!feof(stdin))
 			exit(EXIT_SUCCESS);
 		else
 			perror("readline"), exit(EXIT_FAILURE);
