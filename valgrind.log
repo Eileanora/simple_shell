@@ -1,24 +1,44 @@
-==17010== Memcheck, a memory error detector
-==17010== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==17010== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==17010== Command: ./hsh
-==17010== Parent PID: 15302
-==17010== 
-==17027== 
-==17027== HEAP SUMMARY:
-==17027==     in use at exit: 0 bytes in 0 blocks
-==17027==   total heap usage: 9 allocs, 9 frees, 4,165 bytes allocated
-==17027== 
-==17027== All heap blocks were freed -- no leaks are possible
-==17027== 
-==17027== For lists of detected and suppressed errors, rerun with: -s
-==17027== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==17010== 
-==17010== HEAP SUMMARY:
-==17010==     in use at exit: 0 bytes in 0 blocks
-==17010==   total heap usage: 9 allocs, 9 frees, 1,320 bytes allocated
-==17010== 
-==17010== All heap blocks were freed -- no leaks are possible
-==17010== 
-==17010== For lists of detected and suppressed errors, rerun with: -s
-==17010== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==23418== Memcheck, a memory error detector
+==23418== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==23418== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==23418== Command: ./hsh ____
+==23418== Parent PID: 22946
+==23418== 
+==23435== Syscall param execve(filename) points to unaddressable byte(s)
+==23435==    at 0x494C46B: execve (syscall-template.S:120)
+==23435==    by 0x109422: execmd (in /home/esraasyam/Documents/alx/simple_shell/hsh)
+==23435==    by 0x1094E1: create_process (in /home/esraasyam/Documents/alx/simple_shell/hsh)
+==23435==    by 0x109E83: main (in /home/esraasyam/Documents/alx/simple_shell/hsh)
+==23435==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==23435== 
+==23435== 
+==23435== HEAP SUMMARY:
+==23435==     in use at exit: 0 bytes in 0 blocks
+==23435==   total heap usage: 33 allocs, 33 frees, 4,858 bytes allocated
+==23435== 
+==23435== All heap blocks were freed -- no leaks are possible
+==23435== 
+==23435== For lists of detected and suppressed errors, rerun with: -s
+==23435== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==23418== 
+==23418== Process terminating with default action of signal 2 (SIGINT)
+==23418==    at 0x4975CF1: read (read.c:26)
+==23418==    by 0x48F1595: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:516)
+==23418==    by 0x48E4E87: getdelim (iogetdelim.c:73)
+==23418==    by 0x109E1C: main (in /home/esraasyam/Documents/alx/simple_shell/hsh)
+==23418== 
+==23418== HEAP SUMMARY:
+==23418==     in use at exit: 1,144 bytes in 2 blocks
+==23418==   total heap usage: 19 allocs, 17 frees, 1,748 bytes allocated
+==23418== 
+==23418== LEAK SUMMARY:
+==23418==    definitely lost: 0 bytes in 0 blocks
+==23418==    indirectly lost: 0 bytes in 0 blocks
+==23418==      possibly lost: 0 bytes in 0 blocks
+==23418==    still reachable: 1,144 bytes in 2 blocks
+==23418==         suppressed: 0 bytes in 0 blocks
+==23418== Reachable blocks (those to which a pointer was found) are not shown.
+==23418== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==23418== 
+==23418== For lists of detected and suppressed errors, rerun with: -s
+==23418== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
