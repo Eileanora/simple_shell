@@ -18,21 +18,37 @@ void execmd(char **argv){
     }
 
 }
+
+int shell_exit(char **argv)
+{
+    free_array(argv);
+    exit(EXIT_SUCCESS);
+}
+/**
+int (*builtins[]) (char **) = {
+	    &shell_exit;
+	    &shell_cd;
+	    &shell_help;
+};
+*/
+
 /**
  * create_process - creates a child process
  * @argv: array of strings
  * Return: void
  */
-int create_process(char **argv)
+int create_process(char **argv, char *lineptr)
 {
 	pid_t pid, wpid;
 	int status;
 
 	UNUSED(wpid);
+	UNUSED(lineptr);
 	pid = fork();
 	if (pid == 0)/* child created successfully */
 	{
 		execmd(argv);
+		free_list(get_singleton_list());
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)/* error creating the child */

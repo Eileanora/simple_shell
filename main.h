@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include <sys/wait.h>
 
 #define DELIM " \n\r\t\a"
@@ -19,11 +20,25 @@ char *_strchr(char *s, char c);
 
 char **split_string(char *str, char *delim);
 char *read_line();
-int create_process(char **argv);
+int create_process(char **argv, char *str);
 
 char *copy_str(char *source, char *dist, int start, int end);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _getline(char **lineptr, size_t *n, FILE* stream);
 void execmd(char **argv);
+
+void free_string(char *str);
+void free_array(char **array);
+
+typedef struct node
+{
+	bool is_2d_array;
+	void *data;
+	struct node *next;
+} node_t;
+
+node_t *get_singleton_list();
+node_t *add_node(node_t *head, void *data, bool is_2d_array);
+void free_list(node_t *head);
 
 #endif
