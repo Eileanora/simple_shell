@@ -5,18 +5,15 @@
  * Return: void
  */
 void execmd(char **argv){
-    char *command = NULL;
-
-    if (argv){
-        /* get the command */
-        command = argv[0];
-
-        /* execute the command with execve */
-        if (execve(command, argv, NULL) == -1){
-            perror("Error");
-        };
-    }
-
+	char *command = NULL;
+	if (argv)
+	{
+		/* get the command */
+		command = argv[0];
+		/* execute the command with execve */
+		if (execve(command, argv, NULL) == -1)
+		    	perror("Error");
+	}
 }
 
 
@@ -37,7 +34,7 @@ int create_process(char **argv)
 	char *builein_str[] = {"exit", "cd"};
 
 	UNUSED(wpid);
-	for (i = 0; builein_str[i]; i++)
+	for (i = 0; i < 2; i++)
 		if (_strcmp(argv[0], builein_str[i]) == 0)
 			return ((*builtins[i])(argv));
 
