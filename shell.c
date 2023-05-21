@@ -5,7 +5,7 @@ int main (int argc, char **argv)
 	char *prompt = "MyShell> ";
 	char *lineptr = NULL;
 	size_t nread = 0;
-	int i;
+
 	UNUSED(argc);
 	UNUSED(argv);
 
@@ -22,16 +22,8 @@ int main (int argc, char **argv)
 		}
 		args = split_string(lineptr, DELIM);
 		free(lineptr);
-		/** add args address to the linkedlist */
 		create_process(args);
-		for (i = 0; args[i]; i++)
-		{
-			free(args[i]);
-		}
-		free(args);
-
+		free_array(args);
 	}
-	free(lineptr);
-	free_list(get_singleton_list());
 	return (0);
 }
