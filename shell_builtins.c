@@ -19,7 +19,7 @@ int shell_cd(char **argv)
 	/* make the default path $HOME value*/
 	if (argv[1] == NULL)
 	{
-		chdir(getenv("HOME"));
+		chdir(_getenv("HOME"));
 		return (1);
 	}
 	else

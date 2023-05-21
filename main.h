@@ -45,4 +45,5 @@ void free_nodes(node_t *head);
 int shell_exit(char **args);
 int shell_cd(char **args);
 char *get_location(char *command);
+char *_getenv(char *name);
 #endif

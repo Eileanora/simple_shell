@@ -1,4 +1,24 @@
 #include "main.h"
+
+int (*builtins[])(char **) = {
+	&shell_exit,
+	&shell_cd};
+
+/**
+ * check_builtins - checks if the command is a builtin
+ * @argv: array of strings
+ * Return: 1 if the command is a builtin, -1 otherwise
+*/
+int check_builtins(char **argv)
+{
+	int i;
+	char *builein_str[] = {"exit", "cd"};
+
+	for (i = 0; i < 2; i++)
+		if (_strcmp(argv[0], builein_str[i]) == 0)
+			return ((*builtins[i])(argv));
+	return (-1);
+}
 /**
  * execmd - execute the command with execve
  * @argv: array of strings
@@ -16,11 +36,6 @@ void execmd(char **argv)
 			perror("Error");
 	}
 }
-
-int (*builtins[])(char **) = {
-	&shell_exit,
-	&shell_cd};
-
 /**
  * create_process - creates a child process
  * @argv: array of strings
@@ -29,13 +44,11 @@ int (*builtins[])(char **) = {
 int create_process(char **argv)
 {
 	pid_t pid, wpid;
-	int status, i;
-	char *builein_str[] = {"exit", "cd"};
+	int status;
 
 	UNUSED(wpid);
-	for (i = 0; i < 2; i++)
-		if (_strcmp(argv[0], builein_str[i]) == 0)
-			return ((*builtins[i])(argv));
+	if (check_builtins(argv) != -1)
+		return (1);
 
 	pid = fork();
 	if (pid == 0) /* child created successfully */

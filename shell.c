@@ -20,6 +20,11 @@ int main (int argc, char **argv)
 			free(lineptr);
 			exit(-1);
 		}
+		if (*lineptr == '\n')
+		{
+			free(lineptr);
+			continue;
+		}
 		args = split_string(lineptr, DELIM);
 		free(lineptr);
 		create_process(args);
