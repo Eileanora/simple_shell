@@ -1,8 +1,11 @@
 #include "main.h"
+#include <signal.h>
 
 int (*builtins[])(char **) = {
 	&shell_exit,
-	&shell_cd};
+	&shell_cd,
+	&shell_env
+};
 
 /**
  * check_builtins - checks if the command is a builtin
@@ -12,9 +15,9 @@ int (*builtins[])(char **) = {
 int check_builtins(char **argv)
 {
 	int i;
-	char *builein_str[] = {"exit", "cd"};
+	char *builein_str[] = {"exit", "cd", "env"};
 
-	for (i = 0; i < 2; i++)
+	for (i = 0; i < 3; i++)
 		if (_strcmp(argv[0], builein_str[i]) == 0)
 			return ((*builtins[i])(argv));
 	return (-1);
@@ -32,6 +35,8 @@ void execmd(char **argv)
 	{
 		command = argv[0];
 		actual_command = get_location(command);
+		if (actual_command == NULL)
+			actual_command = command;
 		if (execve(actual_command, argv, NULL) == -1)
 			perror("Error");
 	}
@@ -54,7 +59,6 @@ int create_process(char **argv)
 	if (pid == 0) /* child created successfully */
 	{
 		execmd(argv);
-		perror("Error");
 		free_array(argv);
 		exit(EXIT_FAILURE);
 	}

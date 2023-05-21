@@ -1,18 +1,17 @@
 #include "main.h"
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	char *prompt = "MyShell> ";
-	char *lineptr = NULL;
 	size_t nread = 0;
 
 	UNUSED(argc);
 	UNUSED(argv);
 
-	while(1)
+	while (1)
 	{
-		char **args;
-		lineptr = NULL;
+		char **args, *lineptr = NULL;
+
 		write(1, prompt, _strlen(prompt));
 		if (getline(&lineptr, &nread, stdin) == -1)
 		{

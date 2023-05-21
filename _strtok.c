@@ -21,9 +21,9 @@ char *_strtok(char *str, char *delim)
 
 	start = lastest;
 
-	while (*lastest != '\0' && _strchr(delim, *lastest) == NULL) /* tokenization */
+	while (*lastest != '\0' && _strchr(delim, *lastest) == NULL)
 		lastest++;
-	
+
 	if (*lastest != '\0')
 	{
 		*lastest = '\0';

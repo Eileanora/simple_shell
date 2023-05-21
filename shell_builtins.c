@@ -32,3 +32,17 @@ int shell_cd(char **argv)
 	}
 	return (0);
 }
+
+int shell_env(char **argv)
+{
+	int i;
+	char **env = __environ;
+
+	UNUSED(argv);
+	for (i = 0; env[i] != NULL; i++)
+	{
+		write(1, env[i], _strlen(env[i]));
+		write(1, "\n", 1);
+	}
+	return (1);
+}

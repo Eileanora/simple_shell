@@ -30,6 +30,7 @@ void execmd(char **argv);
 void free_string(char *str);
 void free_array(char **array);
 
+/**
 typedef struct node
 {
 	bool is_2d_array;
@@ -41,9 +42,12 @@ node_t *get_singleton_list();
 node_t *add_node(node_t *head, void *data, bool is_2d_array);
 void free_list(node_t *head);
 void free_nodes(node_t *head);
+*/
 
 int shell_exit(char **args);
 int shell_cd(char **args);
+int shell_env(char **args);
+
 char *get_location(char *command);
 char *_getenv(char *name);
 #endif

@@ -8,6 +8,7 @@
 int _strlen(char *s)
 {
 	int i = 0;
+
 	if (!s)
 		return (0);
 
@@ -69,7 +70,7 @@ char *_strchr(char *s, char c)
 
 	if (!s)
 		return (NULL);
-	
+
 	for (i = 0; s[i]; i++)
 		if (s[i] == c)
 			return (s + i);
