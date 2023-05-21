@@ -6,8 +6,8 @@
  */
 int shell_exit(char **argv)
 {
-    free_array(argv);
-    exit(EXIT_SUCCESS);
+	free_array(argv);
+	exit(EXIT_SUCCESS);
 }
 /**
  * shell_cd - changes the current directory

@@ -25,9 +25,4 @@ void free_array(char **array)
 		free(array);
 	}
 }
-/**
-void free_allocated(void)
-{
-	free_array(environ);
-}
-*/
+

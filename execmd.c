@@ -4,22 +4,22 @@
  * @argv: array of strings
  * Return: void
  */
-void execmd(char **argv){
+void execmd(char **argv)
+{
 	char *command = NULL, *actual_command = NULL;
+
 	if (argv)
 	{
 		command = argv[0];
 		actual_command = get_location(command);
 		if (execve(actual_command, argv, NULL) == -1)
-		    	perror("Error");
+			perror("Error");
 	}
 }
 
-
-int (*builtins[]) (char **) = {
-	    &shell_exit,
-	    &shell_cd
-};
+int (*builtins[])(char **) = {
+	&shell_exit,
+	&shell_cd};
 
 /**
  * create_process - creates a child process
@@ -38,21 +38,20 @@ int create_process(char **argv)
 			return ((*builtins[i])(argv));
 
 	pid = fork();
-	if (pid == 0)/* child created successfully */
+	if (pid == 0) /* child created successfully */
 	{
 		execmd(argv);
 		perror("Error");
 		free_array(argv);
 		exit(EXIT_FAILURE);
 	}
-	else if (pid < 0)/* error creating the child */
+	else if (pid < 0) /* error creating the child */
 	{
 		perror("Error");
 	}
-	else/* parent process */
+	else /* parent process */
 	{
-		do
-		{
+		do {
 			wpid = waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
