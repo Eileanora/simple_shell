@@ -19,18 +19,11 @@ void execmd(char **argv){
 
 }
 
-int shell_exit(char **argv)
-{
-    free_array(argv);
-    exit(EXIT_SUCCESS);
-}
-/**
+
 int (*builtins[]) (char **) = {
-	    &shell_exit;
-	    &shell_cd;
-	    &shell_help;
+	    &shell_exit,
+	    &shell_cd
 };
-*/
 
 /**
  * create_process - creates a child process
@@ -40,9 +33,14 @@ int (*builtins[]) (char **) = {
 int create_process(char **argv)
 {
 	pid_t pid, wpid;
-	int status;
+	int status, i;
+	char *builein_str[] = {"exit", "cd"};
 
 	UNUSED(wpid);
+	for (i = 0; builein_str[i]; i++)
+		if (_strcmp(argv[0], builein_str[i]) == 0)
+			return ((*builtins[i])(argv));
+
 	pid = fork();
 	if (pid == 0)/* child created successfully */
 	{

@@ -42,4 +42,7 @@ node_t *add_node(node_t *head, void *data, bool is_2d_array);
 void free_list(node_t *head);
 void free_nodes(node_t *head);
 
+int shell_exit(char **args);
+int shell_cd(char **args);
+
 #endif
