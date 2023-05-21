@@ -20,7 +20,7 @@ char *_strchr(char *s, char c);
 
 char **split_string(char *str, char *delim);
 char *read_line();
-int create_process(char **argv, char *str);
+int create_process(char **argv);
 
 char *copy_str(char *source, char *dist, int start, int end);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
@@ -40,5 +40,6 @@ typedef struct node
 node_t *get_singleton_list();
 node_t *add_node(node_t *head, void *data, bool is_2d_array);
 void free_list(node_t *head);
+void free_nodes(node_t *head);
 
 #endif

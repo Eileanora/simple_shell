@@ -1,109 +1,33 @@
-==11281== Memcheck, a memory error detector
-==11281== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==11281== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==11281== Command: ./hsh
-==11281== Parent PID: 10413
-==11281== 
-==11303== Invalid read of size 8
-==11303==    at 0x1098EC: free_list (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x1093B6: create_process (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x109B53: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==11303== 
-==11303== 
-==11303== Process terminating with default action of signal 11 (SIGSEGV)
-==11303==  Access not within mapped region at address 0x0
-==11303==    at 0x1098EC: free_list (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x1093B6: create_process (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x109B53: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==  If you believe this happened as a result of a stack
-==11303==  overflow in your program's main thread (unlikely but
-==11303==  possible), you can try to increase the size of the
-==11303==  main thread stack using the --main-stacksize= flag.
-==11303==  The main thread stack size used in this run was 8388608.
-==11303== 
-==11303== HEAP SUMMARY:
-==11303==     in use at exit: 1,238 bytes in 7 blocks
-==11303==   total heap usage: 10 allocs, 3 frees, 2,741 bytes allocated
-==11303== 
-==11303== 6 bytes in 1 blocks are still reachable in loss record 1 of 7
-==11303==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11303==    by 0x109D14: split_string (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x109B1B: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303== 
-==11303== 16 bytes in 1 blocks are still reachable in loss record 2 of 7
-==11303==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11303==    by 0x109C93: split_string (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x109B1B: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303== 
-==11303== 24 bytes in 1 blocks are still reachable in loss record 3 of 7
-==11303==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11303==    by 0x1097A0: get_singleton_list (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x109A98: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303== 
-==11303== 24 bytes in 1 blocks are definitely lost in loss record 4 of 7
-==11303==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11303==    by 0x1097FB: add_node (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x109AA8: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303== 
-==11303== 24 bytes in 1 blocks are definitely lost in loss record 5 of 7
-==11303==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11303==    by 0x1097FB: add_node (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303==    by 0x109B40: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303== 
-==11303== 120 bytes in 1 blocks are still reachable in loss record 6 of 7
-==11303==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11303==    by 0x48EF1A2: getdelim (iogetdelim.c:62)
-==11303==    by 0x109A55: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303== 
-==11303== 1,024 bytes in 1 blocks are still reachable in loss record 7 of 7
-==11303==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11303==    by 0x48EDC23: _IO_file_doallocate (filedoalloc.c:101)
-==11303==    by 0x48FCD5F: _IO_doallocbuf (genops.c:347)
-==11303==    by 0x48FBD5B: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
-==11303==    by 0x48EF387: getdelim (iogetdelim.c:73)
-==11303==    by 0x109A55: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11303== 
-==11303== LEAK SUMMARY:
-==11303==    definitely lost: 48 bytes in 2 blocks
-==11303==    indirectly lost: 0 bytes in 0 blocks
-==11303==      possibly lost: 0 bytes in 0 blocks
-==11303==    still reachable: 1,190 bytes in 5 blocks
-==11303==         suppressed: 0 bytes in 0 blocks
-==11303== 
-==11303== For lists of detected and suppressed errors, rerun with: -s
-==11303== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
-==11281== 
-==11281== HEAP SUMMARY:
-==11281==     in use at exit: 216 bytes in 5 blocks
-==11281==   total heap usage: 10 allocs, 5 frees, 1,389 bytes allocated
-==11281== 
-==11281== 24 bytes in 1 blocks are still reachable in loss record 1 of 4
-==11281==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11281==    by 0x1097A0: get_singleton_list (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11281==    by 0x109A98: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11281== 
-==11281== 24 bytes in 1 blocks are definitely lost in loss record 2 of 4
-==11281==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11281==    by 0x1097FB: add_node (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11281==    by 0x109B40: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11281== 
-==11281== 48 bytes in 2 blocks are definitely lost in loss record 3 of 4
-==11281==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11281==    by 0x1097FB: add_node (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11281==    by 0x109AA8: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11281== 
-==11281== 120 bytes in 1 blocks are possibly lost in loss record 4 of 4
-==11281==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11281==    by 0x48EF1A2: getdelim (iogetdelim.c:62)
-==11281==    by 0x109A55: main (in /home/yasmeen/Documents/vs-folders/ALX/simple_shell/hsh)
-==11281== 
-==11281== LEAK SUMMARY:
-==11281==    definitely lost: 72 bytes in 3 blocks
-==11281==    indirectly lost: 0 bytes in 0 blocks
-==11281==      possibly lost: 120 bytes in 1 blocks
-==11281==    still reachable: 24 bytes in 1 blocks
-==11281==         suppressed: 0 bytes in 0 blocks
-==11281== 
-==11281== For lists of detected and suppressed errors, rerun with: -s
-==11281== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+==10326== Memcheck, a memory error detector
+==10326== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10326== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==10326== Command: ./hsh
+==10326== Parent PID: 10164
+==10326== 
+==10372== 
+==10372== HEAP SUMMARY:
+==10372==     in use at exit: 0 bytes in 0 blocks
+==10372==   total heap usage: 9 allocs, 9 frees, 4,165 bytes allocated
+==10372== 
+==10372== All heap blocks were freed -- no leaks are possible
+==10372== 
+==10372== For lists of detected and suppressed errors, rerun with: -s
+==10372== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==10392== 
+==10392== HEAP SUMMARY:
+==10392==     in use at exit: 0 bytes in 0 blocks
+==10392==   total heap usage: 17 allocs, 17 frees, 4,475 bytes allocated
+==10392== 
+==10392== All heap blocks were freed -- no leaks are possible
+==10392== 
+==10392== For lists of detected and suppressed errors, rerun with: -s
+==10392== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==10326== 
+==10326== HEAP SUMMARY:
+==10326==     in use at exit: 0 bytes in 0 blocks
+==10326==   total heap usage: 15 allocs, 15 frees, 1,627 bytes allocated
+==10326== 
+==10326== All heap blocks were freed -- no leaks are possible
+==10326== 
+==10326== For lists of detected and suppressed errors, rerun with: -s
+==10326== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

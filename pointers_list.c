@@ -37,7 +37,6 @@ void free_list(node_t *head)
 			for (i = 0; data[i] != NULL; i++)
 				free(data[i]);
 		free(data);
-		
 		}
 		else
 		{
@@ -45,4 +44,15 @@ void free_list(node_t *head)
 		}
 		free(tmp);
 	}
+}
+void free_nodes(node_t *head)
+{
+	node_t *tmp;
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+	
 }

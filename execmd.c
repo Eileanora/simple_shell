@@ -37,18 +37,18 @@ int (*builtins[]) (char **) = {
  * @argv: array of strings
  * Return: void
  */
-int create_process(char **argv, char *lineptr)
+int create_process(char **argv)
 {
 	pid_t pid, wpid;
 	int status;
 
 	UNUSED(wpid);
-	UNUSED(lineptr);
 	pid = fork();
 	if (pid == 0)/* child created successfully */
 	{
 		execmd(argv);
-		free_list(get_singleton_list());
+		perror("Error");
+		free_array(argv);
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)/* error creating the child */
