@@ -47,3 +47,68 @@ int shell_env(char **argv)
 	}
 	return (1);
 }
+/**
+ * _setenv - set an environment variable
+ * @name: the name of the variable
+ * @value: the value of the variable
+ * Return: 0 on success, -1 on failure
+*/
+
+int _setenv(char **argv)
+{
+	char *name = argv[1], *value = argv[2];
+	envlist_t *temp = search_node(name);
+	int status;
+
+	if (!name || !value || _strchr(name, '=') != NULL)
+	{
+		perror("setenv");
+		return (-1);
+	}
+	if (temp == NULL)
+	{
+		status = add_node(name, value);
+		if (status == -1)
+		{
+			perror("setenv");
+			return (-1);
+		}
+		return (0);
+	}
+	else
+	{
+		free(temp->value);
+		temp->value = malloc(sizeof(char) * (_strlen(value) + 1));
+		if (!temp->value)
+		{
+			perror("setenv");
+			return (-1);
+		}
+		_strcpy(temp->value, value);
+		return (0);
+	}
+}
+
+/**
+ * _unsetenv - unset an environment variable
+ * @name: the name of the variable
+ * Return: 0 on success, -1 on failure
+*/
+int _unsetenv(char **argv)
+{
+	int status;
+	char *name = argv[1];
+
+	if (!name)
+	{
+		perror("unsetenv");
+		return (-1);
+	}
+	status = delete_node(name);
+	if (status == -1)
+	{
+		perror("unsetenv");
+		return (-1);
+	}
+	return (0);
+}

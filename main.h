@@ -55,7 +55,7 @@ void free_list(void);
 char *get_location(char *command);
 char *_getenv(char *name);
 
-int _setenv(char *name, char *value);
-int _unsetenv(char *name);
+int _setenv(char **argv);
+int _unsetenv(char **argv);
 
 #endif

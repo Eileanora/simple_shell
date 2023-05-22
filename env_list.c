@@ -12,7 +12,27 @@ envlist_t *get_singleton_list(void)
 		envlist = create_node(NULL, NULL);
 	return (envlist);
 }
+/**
+ * cpy_env - copy the __environ variable into a linked list
+*/
+void cpy_env(void)
+{
+	int i = 0, status;
+	char *name, *value;
 
+	while (__environ[i])
+	{
+		name = _strtok(__environ[i], "=");
+		value = _strtok(NULL, "=");
+		status = add_node(name, value);
+		if (status == -1)
+		{
+			perror("cpy_env");
+			return;
+		}
+		i++;
+	}
+}
 /**
  * create_node - add a node to the list
  * @head: the head of the list
