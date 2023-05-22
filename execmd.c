@@ -17,7 +17,7 @@ int (*builtins[])(char **) = {
 int check_builtins(char **argv)
 {
 	int i;
-	char *builein_str[] = {"exit", "cd", "env, setenv, unsetenv"};
+	char *builein_str[] = {"exit", "cd", "env", "setenv", "unsetenv"};
 
 	for (i = 0; i < 5; i++)
 		if (_strcmp(argv[0], builein_str[i]) == 0)

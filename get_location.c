@@ -8,27 +8,30 @@
  * Return: pointer to the value of the environment variable
  * Description: uses extern char **environ
 */
+envlist_t *head = NULL;
+
+void add_env_var(char *name, char *value)
+{
+	envlist_t *new_node = malloc(sizeof(envlist_t));
+	new_node->name = name;
+	new_node->value = value;
+	new_node->next = head;
+	head = new_node;
+}
+
 char *_getenv(char *name)
 {
-	int i, j, len;
-	char *env;
-
-	for (i = 0; __environ[i] != NULL; i++)
+	envlist_t *curr = head;
+	while (curr != NULL)
 	{
-		env = __environ[i];
-		len = _strlen(name);
-
-		for (j = 0; j < len; j++)
+		if (_strcmp(curr->name, name) == 0)
 		{
-			if (env[j] != name[j])
-				break;
+			return curr->value;
 		}
-		if (j == len && env[j] == '=')
-		{
-			return (env + j + 1);
-		}
+		curr = curr->next;
 	}
-	return (NULL);
+
+	return NULL;
 }
 
 /**
@@ -91,6 +94,7 @@ char *get_location(char *command)
 	int command_length, directory_length;
 	struct stat buf;
 
+	add_env_var("PATH", "/bin:/usr/bin");
 	path = _getenv("PATH");
 
 	if (path)
