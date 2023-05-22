@@ -8,6 +8,8 @@ int main(int argc, char **argv)
 	UNUSED(argc);
 	UNUSED(argv);
 
+	/* initialize the environment */
+	cpy_env();
 	while (1)
 	{
 		char **args, *lineptr = NULL;
@@ -29,5 +31,6 @@ int main(int argc, char **argv)
 		create_process(args);
 		free_array(args);
 	}
+	free_list();
 	return (0);
 }

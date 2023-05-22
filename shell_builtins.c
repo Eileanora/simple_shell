@@ -7,6 +7,7 @@
 int shell_exit(char **argv)
 {
 	free_array(argv);
+	free_list();
 	exit(EXIT_SUCCESS);
 }
 /**

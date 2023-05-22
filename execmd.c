@@ -60,6 +60,7 @@ int create_process(char **argv)
 	{
 		execmd(argv);
 		free_array(argv);
+		free_list();
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0) /* error creating the child */
