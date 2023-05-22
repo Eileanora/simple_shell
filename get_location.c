@@ -2,13 +2,16 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-/**
- * _getenv - gets the value of an environment variable
- * @name: name of the environment variable
- * Return: pointer to the value of the environment variable
- * Description: uses extern char **environ
-*/
 envlist_t *head = NULL;
+
+/**
+ * add_env_var - adds an environment variable to the linked list
+ * @name: name of the environment variable
+ * @value: value of the environment variable
+ * Return: void
+ * Description: uses extern char **environ
+ * 
+*/
 
 void add_env_var(char *name, char *value)
 {
@@ -18,6 +21,13 @@ void add_env_var(char *name, char *value)
 	new_node->next = head;
 	head = new_node;
 }
+
+/**
+ * _getenv - gets the value of an environment variable
+ * @name: name of the environment variable
+ * Return: pointer to the value of the environment variable
+ * Description: uses extern char **environ
+*/
 
 char *_getenv(char *name)
 {
