@@ -26,7 +26,7 @@ int create_process(char **argv);
 
 char *copy_str(char *source, char *dist, int start, int end);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-int _getline(char **lineptr, size_t *n, FILE* stream);
+int _getline(char **lineptr, size_t *n, FILE *stream);
 void execmd(char **argv);
 
 void free_string(char *str);
@@ -38,6 +38,12 @@ int shell_cd(char **args);
 int shell_env(char **args);
 
 /* env list difinetions */
+/**
+ * struct env_list - singly linked list of environment variables
+ * @name: name of the variable
+ * @value: value of the variable
+ * @next: points to the next node
+*/
 typedef struct env_list
 {
 	char *name;
