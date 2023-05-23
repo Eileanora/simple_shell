@@ -7,7 +7,7 @@
 */
 int main(int argc, char **argv)
 {
-	char *prompt = "MyShell> ";
+	char *prompt = "$ ";
 	size_t nread = 0;
 
 	UNUSED(argc);

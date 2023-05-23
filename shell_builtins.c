@@ -37,7 +37,7 @@ int shell_cd(char **argv)
 			write(STDOUT_FILENO, "\n", 1);
 		}
 		else
-			write(STDERR_FILENO, "cd: OLDPWD not set\n", 19);
+			write(STDOUT_FILENO, getcwd(CWD, 1024), _strlen(getcwd(CWD, 1024)));
 	}
 	else
 	{
