@@ -58,4 +58,6 @@ char *_getenv(char *name);
 int _setenv(char **argv);
 int _unsetenv(char **argv);
 
+int array_2d_len(char **array);
+
 #endif

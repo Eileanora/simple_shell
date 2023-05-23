@@ -1,7 +1,6 @@
 #include "main.h"
 /**
  * read_line - reads an entire line from a file stream
- * @lineptr: pointer to a string to read into
  * Return: line
 */
 char *read_line()

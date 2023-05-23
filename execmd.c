@@ -22,7 +22,7 @@ int check_builtins(char **argv)
 	for (i = 0; i < 5; i++)
 		if (_strcmp(argv[0], builein_str[i]) == 0)
 			return ((*builtins[i])(argv));
-	return (-1);
+	return (-2);
 }
 /**
  * execmd - execute the command with execve
@@ -54,7 +54,7 @@ int create_process(char **argv)
 	int status;
 
 	UNUSED(wpid);
-	if (check_builtins(argv) != -1)
+	if (check_builtins(argv) != -2)
 		return (1);
 
 	pid = fork();
@@ -68,6 +68,7 @@ int create_process(char **argv)
 	else if (pid < 0) /* error creating the child */
 	{
 		perror("Error");
+		write(STDERR_FILENO, "Creating child process failed\n", 31);
 	}
 	else /* parent process */
 	{

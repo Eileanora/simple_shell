@@ -2,7 +2,7 @@
 /* split string */
 /**
  * split_string - splits string into tokens
- * @str: string to split
+ * @lineptr: string to split
  * @delim: delimiter to split string by
  * Return: pointer to array of tokens
 */
