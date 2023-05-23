@@ -19,12 +19,12 @@ int main(int argc, char **argv)
 	{
 		char **args, *lineptr = NULL;
 
-		write(1, prompt, _strlen(prompt));
+		if (isatty(STDIN_FILENO))
+			write(1, prompt, _strlen(prompt));
 		if (getline(&lineptr, &nread, stdin) == -1)
 		{
-			write(1, "exiting...\n", 11);
 			free(lineptr);
-			exit(-1);
+			break;
 		}
 		if (*lineptr == '\n')
 		{
