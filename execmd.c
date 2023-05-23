@@ -40,7 +40,7 @@ void execmd(char **argv)
 		if (actual_command == NULL)
 			actual_command = command;
 		if (execve(actual_command, argv, NULL) == -1)
-			perror("Error");
+			perror("./hsh");
 	}
 }
 /**
