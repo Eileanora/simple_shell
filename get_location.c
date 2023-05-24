@@ -48,7 +48,6 @@ char *get_location(char *command)
 			if (stat(file_path, &buf) == 0)
 			{
 				free(path_copy);
-
 				return (file_path);
 			}
 			else
@@ -58,6 +57,7 @@ char *get_location(char *command)
 			}
 		}
 		free(path_copy);
+
 		if (stat(command, &buf) == 0)
 			return (command);
 		return (NULL);

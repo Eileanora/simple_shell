@@ -29,39 +29,47 @@ int check_builtins(char **argv)
  * @argv: array of strings
  * Return: void
  */
-void execmd(char **argv)
+char *execmd(char **args)
 {
 	char *command = NULL, *actual_command = NULL;
 
-	if (argv)
+	if (args)
 	{
-		command = argv[0];
+		command = args[0];
 		actual_command = get_location(command);
 		if (actual_command == NULL)
-			actual_command = command;
-		if (execve(actual_command, argv, NULL) == -1)
-			perror("./hsh");
+			return (NULL);
+		else
+			return (actual_command);
 	}
+	return (NULL);
 }
 /**
  * create_process - creates a child process
  * @argv: array of strings
  * Return: void
  */
-int create_process(char **argv)
+int create_process(char **args)
 {
 	pid_t pid, wpid;
 	int status;
+	char *actual_command = NULL;
 
 	UNUSED(wpid);
-	if (check_builtins(argv) != -2)
+	if (check_builtins(args) != -2)
 		return (1);
 
+	actual_command = execmd(args);
+	if (actual_command == NULL)
+	{
+		print_error("not found");
+		return (1);
+	}
 	pid = fork();
 	if (pid == 0) /* child created successfully */
 	{
-		execmd(argv);
-		free_array(argv);
+		execve(actual_command, args, NULL);
+		free_array(args);
 		free_list();
 		exit(EXIT_FAILURE);
 	}
@@ -76,5 +84,7 @@ int create_process(char **argv)
 			wpid = waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
+	if (actual_command)
+		free(actual_command);
 	return (1);
 }

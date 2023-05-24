@@ -22,12 +22,12 @@ char *_strdup(char *str);
 
 char **split_string(char *str, char *delim);
 char *read_line();
-int create_process(char **argv);
+int create_process(char **args);
 
 char *copy_str(char *source, char *dist, int start, int end);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _getline(char **lineptr, size_t *n, FILE *stream);
-void execmd(char **argv);
+char *execmd(char **argv);
 
 void free_string(char *str);
 void free_array(char **array);
@@ -65,5 +65,6 @@ int _setenv(char **argv);
 int _unsetenv(char **argv);
 
 int array_2d_len(char **array);
-
+void print_error(char *error_str);
+void increment_cnt(int signum);
 #endif
