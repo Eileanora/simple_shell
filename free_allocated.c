@@ -39,21 +39,3 @@ int array_2d_len(char **array)
 		;
 	return (i);
 }
-/**
- * cpy_env - copy the __environ variable into a linked list
-*/
-void cpy_env(void)
-{
-	int i;
-	envlist_t *head, *newnode;
-
-	head = get_singleton_list();
-	for (i = 0; __environ[i]; i++)
-	{
-		newnode = create_node(__environ[i]);
-		if (!newnode)
-			return;
-		newnode->next = head->next;
-		head->next = newnode;
-	}
-}

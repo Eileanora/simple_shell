@@ -37,36 +37,9 @@ int shell_exit(char **args);
 int shell_cd(char **args);
 int shell_env(char **args);
 
-/* env list difinetions */
-/**
- * struct env_list - singly linked list of environment variables
- * @value: value of the environment variable
- * @len: length of the value
- * @next: pointer to the next node
-*/
-typedef struct env_list
-{
-	char *value;
-	int len;
-	struct env_list *next;
-} envlist_t;
-envlist_t *get_singleton_list(void);
-void cpy_env(void);
-void free_list(void);
-int add_node(char *val);
-int delete_node(char *name);
-int replace_node(char *name, char *value);
-int print_list(void);
-envlist_t *create_node(char *val);
-envlist_t *search_node(char *name);
-int strcmp_sign(char *s1, char *s2, char sign);
-
 /*----------------------------------------------------------------------*/
 char *get_location(char *command);
 char *_getenv(char *name);
-
-int _setenv(char **argv);
-int _unsetenv(char **argv);
 
 int array_2d_len(char **array);
 void print_error(char *error_str);

@@ -5,8 +5,6 @@ int (*builtins[])(char **) = {
 	&shell_exit,
 	&shell_cd,
 	&shell_env,
-	&_setenv,
-	&_unsetenv
 };
 
 /**
@@ -17,9 +15,9 @@ int (*builtins[])(char **) = {
 int check_builtins(char **argv)
 {
 	int i;
-	char *builein_str[] = {"exit", "cd", "env", "setenv", "unsetenv"};
+	char *builein_str[] = {"exit", "cd", "env"};
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 3; i++)
 		if (_strcmp(argv[0], builein_str[i]) == 0)
 			return ((*builtins[i])(argv));
 	return (-2);
@@ -52,25 +50,25 @@ char *execmd(char **args)
 int create_process(char **args)
 {
 	pid_t pid, wpid;
-	int status;
+	int status, status2;
 	char *actual_command = NULL;
 
 	UNUSED(wpid);
-	if (check_builtins(args) != -2)
-		return (1);
+	status2 = check_builtins(args);
+	if (status2 != -2)
+		return (status2);
 
 	actual_command = execmd(args);
 	if (actual_command == NULL)
 	{
 		print_error("not found");
-		return (1);
+		return (0);
 	}
 	pid = fork();
 	if (pid == 0) /* child created successfully */
 	{
-		execve(actual_command, args, NULL);
+		execve(actual_command, args, __environ);
 		free_array(args);
-		free_list();
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0) /* error creating the child */
@@ -84,7 +82,7 @@ int create_process(char **args)
 			wpid = waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	if (actual_command)
+	if (actual_command && actual_command != args[0])
 		free(actual_command);
 	return (1);
 }

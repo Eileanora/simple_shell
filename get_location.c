@@ -10,11 +10,25 @@
 
 char *_getenv(char *name)
 {
-	envlist_t *temp = search_node(name);
+	int i, j, name_length;
+	char *env;
 
-	if (!temp)
-		return (NULL);
-	return (temp->value);
+	for (i = 0; __environ[i] != NULL; i++)
+	{
+		env = __environ[i];
+		name_length = _strlen(name);
+
+		for (j = 0; j < name_length; j++)
+		{
+			if (env[j] != name[j])
+				break;
+		}
+		if (j == name_length && env[j] == '=')
+		{
+			return (env + j + 1);
+		}
+	}
+	return (NULL);
 }
 /**
  * get_location - gets the location of a command
@@ -28,8 +42,9 @@ char *get_location(char *command)
 	char *path, *path_copy, *path_token, *file_path;
 	int command_length, directory_length;
 	struct stat buf;
+	if (stat(command, &buf) == 0)
+		return (command);
 
-	add_node("PATH", "/bin:/usr/bin");
 	path = _getenv("PATH");
 	if (path)
 	{
@@ -57,7 +72,6 @@ char *get_location(char *command)
 			}
 		}
 		free(path_copy);
-
 		if (stat(command, &buf) == 0)
 			return (command);
 		return (NULL);
