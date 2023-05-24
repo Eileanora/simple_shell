@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 			write(1, prompt, _strlen(prompt));
 		signal(SIGINT, signal_handler);
 		increment_cnt(0);
-		if (_getline(&lineptr, &nread, stdin) == -1)
+		if (getline(&lineptr, &nread, stdin) == -1)
 		{
 			free(lineptr);
 			break;
