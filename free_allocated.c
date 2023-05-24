@@ -44,16 +44,32 @@ int array_2d_len(char **array)
 */
 void cpy_env(void)
 {
-	int i;
-	envlist_t *head, *newnode;
+	int i = 0, status;
 
-	head = get_singleton_list();
-	for (i = 0; __environ[i]; i++)
+	while (__environ[i])
 	{
-		newnode = create_node(__environ[i]);
-		if (!newnode)
+		status = add_node(__environ[i]);
+		if (status == 0)
+		{
+			write(STDERR_FILENO, "Error: malloc failed\n", 22);
 			return;
-		newnode->next = head->next;
-		head->next = newnode;
+		}
+		i++;
+	}
+}
+/**
+ * free_list - free the list
+*/
+void free_list(void)
+{
+	envlist_t *temp = get_singleton_list();
+	envlist_t *next;
+
+	while (temp)
+	{
+		next = temp->next;
+		free(temp->value);
+		free(temp);
+		temp = next;
 	}
 }

@@ -38,59 +38,53 @@ envlist_t *create_node(char *val)
 	return (newnode);
 }
 /**
- * strcmp_sign - compare two strings till a sign
- * @s1: the first string
- * @s2: the second string
- * @sign: the sign
- * Return: 0 if equal, 1 if not
+ * add_node - add a node to the list
+ * @val: the value of env variable
+ * Return: 1 on success, 0 on failure
 */
-int strcmp_sign(char *s1, char *s2, char sign)
+int add_node(char *val)
 {
-	int i;
+	envlist_t *newnode, *temp;
 
-	for (i = 0; s1[i] && s2[i] && s1[i] != sign && s2[i] != sign; i++)
+	newnode = create_node(val);
+	if (!newnode)
+		return (0);
+	temp = get_singleton_list();
+	if (!temp)
 	{
-		if (s1[i] != s2[i])
-			return (1);
+		envlist = newnode;
+		return (1);
 	}
-	if (s1[i] == sign && s2[i] == sign)
-		return (0);
-	if (s1[i] == '\0' && s2[i] == sign)
-		return (0);
+	while (temp->next)
+		temp = temp->next;
+	temp->next = newnode;
 	return (1);
 }
 
 /**
- * print_list - print the list
- * Return: the number of nodes
+ * delete_node - delete a node from the list
+ * @name: the name of the variable
+ * Return: 1 on success, 0 on failure
 */
-int print_list(void)
+int delete_node(char *name)
 {
 	envlist_t *temp = get_singleton_list();
-	int i = 0;
+	envlist_t *prev = NULL;
 
-	while (temp)
+	if (!temp)
+		return (0);
+	while (temp && strcmp_sign(temp->value, name, '=') != 0)
 	{
-		write(STDOUT_FILENO, temp->value, temp->len);
-		write(STDOUT_FILENO, "\n", 1);
+		prev = temp;
 		temp = temp->next;
-		i++;
 	}
-	return (i);
-}
-/**
- * free_list - free the list
-*/
-void free_list(void)
-{
-	envlist_t *temp = get_singleton_list();
-	envlist_t *next;
-
-	while (temp)
-	{
-		next = temp->next;
-		free(temp->value);
-		free(temp);
-		temp = next;
-	}
+	if (!temp)
+		return (0);
+	if (!prev)
+		envlist = temp->next;
+	else
+		prev->next = temp->next;
+	free(temp->value);
+	free(temp);
+	return (1);
 }

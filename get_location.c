@@ -29,7 +29,8 @@ char *get_location(char *command)
 	int command_length, directory_length;
 	struct stat buf;
 
-	add_node("PATH", "/bin:/usr/bin");
+	if (stat(command, &buf) == 0)
+		return (command);
 	path = _getenv("PATH");
 	if (path)
 	{

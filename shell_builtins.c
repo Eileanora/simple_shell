@@ -72,6 +72,7 @@ int shell_env(char **argv)
 	{
 		write(STDOUT_FILENO, temp->value, temp->len);
 		write(STDOUT_FILENO, "\n", 1);
+		temp = temp->next;
 	}
 	return (1);
 }
@@ -84,7 +85,6 @@ int shell_env(char **argv)
 int _setenv(char **argv)
 {
 	char *name, *value;
-	envlist_t *temp;
 	int status;
 
 	if (argv[1] == NULL || argv[2] == NULL)
@@ -103,15 +103,14 @@ int _setenv(char **argv)
 		write(STDERR_FILENO, "Wrong number of arguments\n", 26);
 		return (0);
 	}
-	int status = replace_node(name, value);
-
+	status = replace_node(name, value);
 	return (status);
 }
 /* error handling needs reveiwing */
 /**
  * _unsetenv - unset an environment variable
  * @argv: arguments passed to the function
- * Return: 0 on success, -1 on failure
+ * Return: 1 on success, 0 on failure
 */
 int _unsetenv(char **argv)
 {
@@ -121,19 +120,19 @@ int _unsetenv(char **argv)
 	if (array_2d_len(argv) != 2)
 	{
 		write(STDERR_FILENO, "Wrong number of arguments\n", 26);
-		return (-1);
+		return (0);
 	}
 	name = argv[1];
 	if (!name)
 	{
 		write(STDERR_FILENO, "Wrong number of arguments\n", 26);
-		return (-1);
+		return (0);
 	}
 	status = delete_node(name);
-	if (status == -1)
+	if (status == 0)
 	{
 		write(STDERR_FILENO, "Error allocating memory\n", 24);
-		return (-1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }

@@ -68,7 +68,7 @@ int create_process(char **args)
 	pid = fork();
 	if (pid == 0) /* child created successfully */
 	{
-		execve(actual_command, args, NULL);
+		execve(actual_command, args, __environ);
 		free_array(args);
 		free_list();
 		exit(EXIT_FAILURE);
@@ -84,7 +84,7 @@ int create_process(char **args)
 			wpid = waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	if (actual_command)
+	if (actual_command && actual_command != args[0])
 		free(actual_command);
 	return (1);
 }
