@@ -26,7 +26,7 @@ int check_builtins(char **argv)
 }
 /**
  * execmd - execute the command with execve
- * @argv: array of strings
+ * @args: array of strings
  * Return: void
  */
 char *execmd(char **args)
@@ -46,7 +46,7 @@ char *execmd(char **args)
 }
 /**
  * create_process - creates a child process
- * @argv: array of strings
+ * @args: array of strings
  * Return: void
  */
 int create_process(char **args)

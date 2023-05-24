@@ -1,6 +1,6 @@
 #include "main.h"
 
-static int cnt = 0;
+static int cnt;
 /**
  * _itoa - convert integer to string
  * @num: the integer

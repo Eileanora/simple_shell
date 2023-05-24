@@ -104,6 +104,7 @@ int _setenv(char **argv)
 		return (0);
 	}
 	int status = replace_node(name, value);
+
 	return (status);
 }
 /* error handling needs reveiwing */

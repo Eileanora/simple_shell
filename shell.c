@@ -27,8 +27,7 @@ int main(int argc, char **argv)
 
 	/* initialize the environment */
 	cpy_env();
-	do
-	{
+	do {
 		char **args, *lineptr = NULL;
 
 		if (isatty(STDIN_FILENO))
@@ -49,8 +48,7 @@ int main(int argc, char **argv)
 		free(lineptr);
 		status = create_process(args);
 		free_array(args);
-	}
-	while (status);
+	} while (status);
 	free_list();
 	return (0);
 }
