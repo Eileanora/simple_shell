@@ -70,18 +70,15 @@ int shell_env(char **argv)
 	UNUSED(argv);
 	while (temp != NULL)
 	{
-		write(1, temp->name, _strlen(temp->name));
-		write(1, "=", 1);
-		write(1, temp->value, _strlen(temp->value));
-		write(1, "\n", 1);
-		temp = temp->next;
+		write(STDOUT_FILENO, temp->value, temp->len);
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	return (1);
 }
 /**
  * _setenv - set an environment variable
  * @argv: arguments passed to the function
- * Return: 0 on success, -1 on failure
+ * Return: 1 on success, 0 on failure
 */
 
 int _setenv(char **argv)
@@ -93,37 +90,21 @@ int _setenv(char **argv)
 	if (argv[1] == NULL || argv[2] == NULL)
 	{
 		write(STDERR_FILENO, "Invalid argument\n", 17);
-		return (-1);
+		return (0);
 	}
 	name = argv[1], value = argv[2];
 	if (!name || !value || _strchr(name, '=') != NULL)
 	{
 		write(STDERR_FILENO, "Invalid argument\n", 17);
-		return (-1);
-	}
-	temp = search_node(name);
-	if (temp == NULL)
-	{
-		status = add_node(name, value);
-		if (status == -1)
-		{
-			write(STDERR_FILENO, "Error allocating memory\n", 24);
-			return (-1);
-		}
 		return (0);
 	}
-	else
+	if (array_2d_len(argv)  != 3)
 	{
-		free(temp->value);
-		temp->value = malloc(sizeof(char) * (_strlen(value) + 1));
-		if (!temp->value)
-		{
-			write(STDERR_FILENO, "Error allocating memory\n", 24);
-			return (-1);
-		}
-		_strcpy(temp->value, value);
+		write(STDERR_FILENO, "Wrong number of arguments\n", 26);
 		return (0);
 	}
+	int status = replace_node(name, value);
+	return (status);
 }
 /* error handling needs reveiwing */
 /**

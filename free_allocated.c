@@ -27,24 +27,6 @@ void free_array(char **array)
 	}
 }
 /**
- * free_list - free the list
- * Return: void
-*/
-void free_list(void)
-{
-	envlist_t *temp = get_singleton_list();
-
-	while (temp)
-	{
-		envlist_t *next = temp->next;
-
-		free(temp->name);
-		free(temp->value);
-		free(temp);
-		temp = next;
-	}
-}
-/**
  * array_2d_len - returns the length of a 2d array
  * @array: array to check
  * Return: length of the array
@@ -62,20 +44,16 @@ int array_2d_len(char **array)
 */
 void cpy_env(void)
 {
-	int i = 0, status;
-	char *name, *value;
+	int i;
+	envlist_t *head, *newnode;
 
-	while (__environ[i])
+	head = get_singleton_list();
+	for (i = 0; __environ[i]; i++)
 	{
-		name = _strtok(__environ[i], "=");
-		/* value = all remaining untill the end */
-		value = _strtok(NULL, "\0");
-		status = add_node(name, value);
-		if (status == -1)
-		{
-			write(STDERR_FILENO, "Error: malloc failed\n", 22);
+		newnode = create_node(__environ[i]);
+		if (!newnode)
 			return;
-		}
-		i++;
+		newnode->next = head->next;
+		head->next = newnode;
 	}
 }
