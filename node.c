@@ -74,6 +74,21 @@ envlist_t *search_node(char *name)
 	return (NULL);
 }
 /**
+ * get_value - get the value of a variable
+ * @var: the env variable
+ * Return: the value of the variable
+*/
+char *get_value(char *var)
+{
+	int i;
+
+	for (i = 0; var[i] && var[i] != '='; i++)
+		;
+	if (var[i] == '=')
+		return (var + i + 1);
+	return (NULL);
+}
+/**
  * strcmp_sign - compare two strings till a sign
  * @s1: the first string
  * @s2: the second string

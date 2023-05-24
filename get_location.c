@@ -11,10 +11,12 @@
 char *_getenv(char *name)
 {
 	envlist_t *temp = search_node(name);
+	char *val;
 
 	if (!temp)
 		return (NULL);
-	return (temp->value);
+	val = get_value(temp->value);
+	return (val);
 }
 /**
  * get_location - gets the location of a command

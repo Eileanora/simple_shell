@@ -60,7 +60,7 @@ int print_list(void);
 envlist_t *create_node(char *val);
 envlist_t *search_node(char *name);
 int strcmp_sign(char *s1, char *s2, char sign);
-
+char *get_value(char *var);
 /*----------------------------------------------------------------------*/
 char *get_location(char *command);
 char *_getenv(char *name);
