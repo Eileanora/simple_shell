@@ -67,8 +67,10 @@ char *_getenv(char *name);
 
 int _setenv(char **argv);
 int _unsetenv(char **argv);
+int btats(char **argv);
 
 int array_2d_len(char **array);
-void print_error(char *error_str);
+void print_error(int sz, ...);
 void increment_cnt(int signum);
+
 #endif

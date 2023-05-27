@@ -43,7 +43,7 @@ int replace_node(char *name, char *value)
 	}
 	old_val = exist->value;
 	free(exist->value);
-	exist->value = malloc(sizeof(char) * (_strlen(value) + 1));
+	exist->value = malloc(sizeof(char) * (_strlen(val) + 1));
 	if (!exist->value)
 	{
 		exist = create_node(old_val);
@@ -51,8 +51,8 @@ int replace_node(char *name, char *value)
 		return (0);
 	}
 	/* free(old_val); */
-	_strcpy(exist->value, value);
-	exist->len = _strlen(value);
+	_strcpy(exist->value, val);
+	exist->len = _strlen(val);
 	free(val);
 	return (1);
 }

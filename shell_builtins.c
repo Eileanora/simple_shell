@@ -17,16 +17,14 @@ int shell_exit(char **argv)
 */
 int shell_cd(char **argv)
 {
-	char *oldpwd = NULL, CWD[1024];
-	char *_setenv_args[4] = {"setenv", "OLDPWD", NULL, NULL};
-	char *_unsetenv_args[4] = {"unsetenv", "PWD", NULL, NULL};
+	char *oldpwd, CWD[1024];
+	char *setenv_args[4] = {"setenv", NULL, NULL};
+
+	oldpwd = _getenv("OLDPWD");
+	getcwd(CWD, 1024);
 	/* make the default path $HOME value*/
 	if (argv[1] == NULL || _strcmp(argv[1], "~") == 0)
-	{
 		chdir(_getenv("HOME"));
-		/* write(STDOUT_FILENO, _getenv("HOME"), _strlen(_getenv("HOME"))); */
-		/* write(STDOUT_FILENO, "\n", 1); */
-	}
 	else if (_strcmp(argv[1], "-") == 0)
 	{
 		oldpwd = _getenv("OLDPWD");
@@ -37,24 +35,25 @@ int shell_cd(char **argv)
 			write(STDOUT_FILENO, "\n", 1);
 		}
 		else
-			write(STDOUT_FILENO, getcwd(CWD, 1024), _strlen(getcwd(CWD, 1024)));
+			write(STDOUT_FILENO, CWD, _strlen(CWD));
 	}
 	else
 	{
 		if (chdir(argv[1]) != 0)
 		{
-			perror("cd");
+			print_error(3, "cd: can't cd to ", argv[1], "\n");
 			return (1);
 		}
-		/* write(STDOUT_FILENO, getcwd(CWD, 1024), _strlen(getcwd(CWD, 1024))); */
-		/* write(STDOUT_FILENO, "\n", 1); */
 	}
-	_setenv_args[2] = _getenv("PWD");
-	_setenv(_setenv_args);
-	_unsetenv(_unsetenv_args);
-	_setenv_args[1] = "PWD";
-	_setenv_args[2] = getcwd(CWD, 1024);
-	_setenv(_setenv_args);
+	/* set the new oldpwd value */
+	setenv_args[1] = "OLDPWD";
+	setenv_args[2] = _getenv("PWD");
+	_setenv(setenv_args);
+
+	/* set the new pwd value */
+	setenv_args[1] = "PWD";
+	setenv_args[2] = getcwd(CWD, 1024);
+	_setenv(setenv_args);
 
 	return (1);
 }

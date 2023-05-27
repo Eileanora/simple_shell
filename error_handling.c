@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdarg.h>
 
 static int cnt;
 /**
@@ -51,16 +52,26 @@ void increment_cnt(int signum)
 }
 /**
  * print_error - print the error message
- * @error_str: the error message
+ * @sz: the number of arguments
+ * @...: the arguments
 */
-void print_error(char *error_str)
+void print_error(int sz, ...)
 {
 	char *cnt_str = _itoa(cnt);
+	va_list args;
+	char *arg = NULL;
+	int i = 0;
 
 	write(STDERR_FILENO, "./hsh: ", 7);
 	write(STDERR_FILENO, cnt_str, _strlen(cnt_str));
 	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, error_str, _strlen(error_str));
-	write(STDERR_FILENO, "\n", 1);
+	va_start(args, sz);
+	while (i < sz)
+	{
+		arg = va_arg(args, char *);
+		write(STDERR_FILENO, arg, _strlen(arg));
+		i++;
+	}
+	va_end(args);
 	free(cnt_str);
 }
