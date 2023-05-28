@@ -17,14 +17,18 @@ int shell_exit(char **argv)
 */
 int shell_cd(char **argv)
 {
-	char *oldpwd, CWD[1024];
+	char *oldpwd, CWD[1024], *home = NULL;
 	char *setenv_args[4] = {"setenv", NULL, NULL};
 
 	oldpwd = _getenv("OLDPWD");
+	home = _getenv("HOME");
 	getcwd(CWD, 1024);
 	/* make the default path $HOME value*/
 	if (argv[1] == NULL || _strcmp(argv[1], "~") == 0)
-		chdir(_getenv("HOME"));
+	{
+		if (home != NULL)
+			chdir(home);
+	}
 	else if (_strcmp(argv[1], "-") == 0)
 	{
 		oldpwd = _getenv("OLDPWD");
@@ -35,7 +39,11 @@ int shell_cd(char **argv)
 			write(STDOUT_FILENO, "\n", 1);
 		}
 		else
+		{
 			write(STDOUT_FILENO, CWD, _strlen(CWD));
+			write(STDOUT_FILENO, "\n", 1);
+		}
+
 	}
 	else
 	{
