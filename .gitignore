@@ -1,4 +1,4 @@
 *.log
 hsh
-.bash
+*.bash
 todo.txt
