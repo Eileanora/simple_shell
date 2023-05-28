@@ -19,30 +19,37 @@ The shell can execute any command that is in the PATH variable, and also the fol
   <tr>
     <th> Command </th>
     <th> Description </th>
+    <th> Usage </th>
   </tr>
   <tr>
     <td> env </td>
     <td> prints the environment variables </td>
+    <td> env </td>
   </tr>
   <tr>
     <td> setenv </td>
     <td> sets a new environment variable </td>
+    <td> setenv VARIABLE VALUE </td>
   </tr>
   <tr>
     <td> unsetenv </td>
     <td> removes an environment variable </td>
+    <td> unsetenv VARIABLE </td>
   </tr>
   <tr>
     <td> cd </td>
     <td> changes the current directory </td>
+    <td> cd DIRECTORY | cd | cd - </td>
   </tr>
   <tr>
     <td> btats </td>
     <td> prints the current working directory </td>
+    <td> btats </td>
   </tr>
   <tr>
     <td> exit </td>
     <td> exits the shell </td>
+    <td> exit </td>
   </tr>
 </table>
 
